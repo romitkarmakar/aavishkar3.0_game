@@ -18,7 +18,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -30,13 +29,14 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       //debugShowMaterialGrid: true,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.red,
-        accentColor: Colors.black
-      ),
+          iconTheme: IconThemeData(color: Colors.grey),
+          buttonTheme: ButtonThemeData(buttonColor: Colors.grey),
+          brightness: Brightness.dark,
+          primaryColor: Colors.white,
+          accentColor: Colors.grey),
       routes: {
         "/": (BuildContext context) => HomePage(),
-        "/diceGame": (BuildContext context) => DiceGame(),
+        "/dicegame": (BuildContext context) => DiceGame(),
         "/21game": (BuildContext context) => CardGame(),
       },
     );

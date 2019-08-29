@@ -44,6 +44,13 @@ flutter:
   assets:
    - assets/cards.jpg
    - assets/dice.jpg
+   - assets/mdice.png
+   - assets/mcards.jpg
+   - assets/gambling.png
+   - assets/fdice.jpg
+   - assets/fcards.png
+   - assets/dicebg.jpg
+   - assets/cardbg.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
