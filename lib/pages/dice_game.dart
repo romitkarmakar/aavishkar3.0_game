@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
+import 'package:flutter/services.dart';
 
 class DiceGame extends StatefulWidget {
   @override
@@ -15,7 +16,13 @@ var _dice2Output = 0;
 class _DiceGameState extends State<DiceGame> {
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.pop(context);
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+            statusBarColor: Colors.white,
+            systemNavigationBarIconBrightness: Brightness.dark));
+      },
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
@@ -82,6 +89,9 @@ class _DiceGameState extends State<DiceGame> {
                     padding: EdgeInsets.fromLTRB(0, 40.0, 0, 0),
                     onPressed: () {
                       Navigator.pop(context);
+                      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+                          statusBarColor: Colors.white,
+                          systemNavigationBarIconBrightness: Brightness.dark));
                     },
                     child: Icon(
                       Icons.arrow_back_ios,
