@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
-  
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -12,6 +11,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               "CASINO",
               style: TextStyle(
-                  color: Colors.blueGrey,
+                  color: Colors.orange[400],
                   fontWeight: FontWeight.bold,
                   fontSize: 34.0),
             ),
@@ -29,12 +29,13 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Icon(
                   Icons.attach_money,
-                  color: Colors.green[400],
+                  color: Colors.green[900],
+                  //Color(0xFF4ef037),
                   size: 34,
                 ),
                 Text(
-                  "tokens",
-                  style: TextStyle(color: Colors.black),
+                  "TOKENS",
+                  style: TextStyle(color: Colors.green[900]),
                 ),
               ],
             )
@@ -45,11 +46,12 @@ class _HomePageState extends State<HomePage> {
       body: Stack(
         children: <Widget>[
           Positioned(
-            top: 20,
-            right: 20,
+            top: 0,
+            right: 7,
             child: RaisedButton(
+              shape: StadiumBorder(),
               padding: EdgeInsets.all(5),
-              color: Colors.orange,
+              color: Colors.orange[400],
               splashColor: Colors.orangeAccent[700],
               onPressed: () {
                 Navigator.pushNamed(context, "/store");
