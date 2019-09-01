@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:flutter/rendering.dart';
 
-import './pages/home_page.dart';
-import './pages/dice_game.dart';
-import './pages/21_game.dart';
-import './pages/store.dart';
+import 'app/views/home_page.dart';
+import 'close-the-box/views/dice_game.dart';
+import '21-card-game/views/21_game.dart';
+import 'app/views/store.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;
