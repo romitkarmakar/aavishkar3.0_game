@@ -268,35 +268,11 @@ class _DiceGameState extends State<DiceGame> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         player == 1
-            ? Text(
-                "$_p1d1",
-                style: prefix0.TextStyle(
-                  fontSize: 112,
-                  color: Colors.orange[300],
-                ),
-              )
-            : Text(
-                "$_p2d1",
-                style: prefix0.TextStyle(
-                  fontSize: 112,
-                  color: Colors.orange[300],
-                ),
-              ),
+            ? Expanded(child:Image.asset('assets/dice$_p1d1.jpeg'))
+            : Expanded(child:Image.asset('assets/dice$_p2d1.jpeg')),
         player == 1
-            ? Text(
-                "$_p1d2",
-                style: prefix0.TextStyle(
-                  fontSize: 112,
-                  color: Colors.blue[300],
-                ),
-              )
-            : Text(
-                "$_p2d2",
-                style: prefix0.TextStyle(
-                  fontSize: 112,
-                  color: Colors.blue[300],
-                ),
-              ),
+            ? Expanded(child:Image.asset('assets/dice$_p1d2.jpeg'))
+            : Expanded(child:Image.asset('assets/dice$_p2d2.jpeg'))
       ],
     );
   }
