@@ -11,11 +11,11 @@ class DiceGame extends StatefulWidget {
 }
 
 class _DiceGameState extends State<DiceGame> {
-  var _p1d1 = 0;
-  var _p1d2 = 0;
+  var _p1d1 = 1;
+  var _p1d2 = 1;
 
-  var _p2d1 = 0;
-  var _p2d2 = 0;
+  var _p2d1 = 1;
+  var _p2d2 = 1;
 
   bool _toss = false;
   var _p1toss = 0;
