@@ -57,19 +57,20 @@ class _CardGameState extends State<CardGame> {
                         color: Colors.white.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20.0)
                         ),
-                    margin: EdgeInsets.all(20.0),
-                    padding: EdgeInsets.all(15.0),
+                    margin: EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20.0)),
-                      margin: EdgeInsets.all(15.0),
-                      padding: EdgeInsets.all(15.0),
+                      margin: EdgeInsets.all(5.0),
+                      padding: EdgeInsets.all(5.0),
                       child:Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               _button(Colors.green, 'HIT', true,2),
                               SizedBox(
@@ -78,24 +79,27 @@ class _CardGameState extends State<CardGame> {
                               _button(Colors.red, 'STAND', false,2)
                             ],
                           ),
-                          Container(
+                          Expanded(child:Container(
+                            width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(20.0)),
                             margin: EdgeInsets.all(4.0),
                             padding: EdgeInsets.all(2.0),
-                            child: _card2(_p2c1, _p2c2),
-                          ),
+                            child: _card(_p2c1,_p2c2)
+                          ),),
                           _start(),
-                          Container(
+                          Expanded( child:Container(
+                            width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(20.0)),
                             margin: EdgeInsets.all(4.0),
                             padding: EdgeInsets.all(2.0),
-                            child:_card1(_p1c1, _p1c2),
-                          ),
+                            child:_card(_p1c1, _p1c2),
+                          ),),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               _button(Colors.green, 'HIT', true,1),
                               SizedBox(
@@ -141,7 +145,7 @@ Widget _button(Color color, String label, bool state, var player)
     ),
     onPressed: (){
       setState((){
-      Hit(player);
+      Hit(1);
       });
     },
   );
@@ -216,28 +220,28 @@ Widget _start()
   );
 }
 
-Widget _card1( var cardnumber1, var cardnumber2)
+Widget _card( var cardnumber1, var cardnumber2)
 {
-  return  Row(
-      children: <Widget>[
-        Expanded(child:Image.asset('assets/card$cardnumber1.png')),
-        SizedBox( width: 2,),
-        Expanded(child:Image.asset('assets/card$cardnumber2.png',)),
-        SizedBox( width: 2,),
-      ],
-  );
-}
-
-Widget _card2( var cardnumber1, var cardnumber2)
-{
-  return Row(
-      children: <Widget>[
-        Expanded(child:Image.asset('assets/card$cardnumber1.png')),
-        SizedBox( width: 2,),
-        Expanded(child:Image.asset('assets/card$cardnumber2.png',)),
-        SizedBox( width: 2,),
-      ],
-  );
+  return  Center(
+            widthFactor: MediaQuery.of(context).size.width,
+            child:Stack(
+              children: <Widget>[
+                Positioned(
+                  left:0,
+                  bottom: 2,
+                  top: 2,
+                  child:Image.asset('assets/card$cardnumber1.png'),
+                ),
+                Positioned(
+                  left: 50,
+                  bottom: 2,
+                  top: 2,
+                  child:Image.asset('assets/card$cardnumber2.png'),
+                ),
+              ],
+              overflow: Overflow.clip,
+            )
+         );
 }
 
 
