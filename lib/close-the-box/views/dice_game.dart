@@ -268,12 +268,12 @@ class _DiceGameState extends State<DiceGame> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         player == 1
-            ? Expanded(child:Image.asset('assets/dice$_p1d1.jpeg'))
-            : Expanded(child:Image.asset('assets/dice$_p2d1.jpeg')),
+            ? Expanded(child:Image.asset('assets/dice$_p1d1.png'))
+            : Expanded(child:Image.asset('assets/dice$_p2d1.png')),
             SizedBox(width: 15,),
         player == 1
-            ? Expanded(child:Image.asset('assets/dice$_p1d2.jpeg'))
-            : Expanded(child:Image.asset('assets/dice$_p2d2.jpeg'))
+            ? Expanded(child:Image.asset('assets/dice$_p1d2.png'))
+            : Expanded(child:Image.asset('assets/dice$_p2d2.png'))
       ],
     );
   }

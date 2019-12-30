@@ -69,6 +69,7 @@ class _CardGameState extends State<CardGame> {
                       child:Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
+                          _chips(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -105,9 +106,10 @@ class _CardGameState extends State<CardGame> {
                               SizedBox(
                                 width: 10,
                               ),
-                              _button(Colors.red, 'STAND', false,1)
+                              _button(Colors.red, 'STAND', false,1),
                             ],
-                          )
+                          ),
+                          _chips()
                         ],
                       ),
                     )
@@ -138,7 +140,7 @@ class _CardGameState extends State<CardGame> {
 
 Widget _button(Color color, String label, bool state, var player)
 {
-  return RaisedButton(
+  return Expanded(child:RaisedButton(
     color: color,
     child: Text(
       '$label',
@@ -148,6 +150,7 @@ Widget _button(Color color, String label, bool state, var player)
       Hit(1);
       });
     },
+  )
   );
 }
 Hit(var player){
@@ -242,6 +245,42 @@ Widget _card( var cardnumber1, var cardnumber2)
               overflow: Overflow.clip,
             )
          );
+}
+
+Widget _chips()
+{
+  return Container(
+
+                            width: MediaQuery.of(context).size.width,
+  child:Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+    children: <Widget>[
+      Expanded(child:FlatButton(
+        onPressed: (){},
+        color: Colors.orange,
+        child: Text('50'),
+      ),),
+      SizedBox(width: 10,),
+      Expanded(child:FlatButton(
+        onPressed: (){},
+        color: Colors.amberAccent,
+        child: Text('100'),
+      ),),
+      SizedBox(width: 10,),
+      Expanded(child:FlatButton(
+        onPressed: (){},
+        color: Colors.cyan,
+        child: Text('500'),
+      ),),
+      SizedBox(width: 10,),
+      Expanded(child:FlatButton(
+        onPressed: (){},
+        color: Colors.pinkAccent,
+        child: Text('1000'),
+      ),),
+    ],
+  )
+  );
 }
 
 
