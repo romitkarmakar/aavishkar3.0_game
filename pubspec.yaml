@@ -60,6 +60,59 @@ flutter:
    - assets/dice4.jpeg
    - assets/dice5.jpeg
    - assets/dice6.jpeg
+   - assets/card1.png
+   - assets/card2.png
+   - assets/card3.png
+   - assets/card4.png
+   - assets/card5.png
+   - assets/card6.png
+   - assets/card7.png
+   - assets/card8.png
+   - assets/card9.png
+   - assets/card10.png
+   - assets/card11.png
+   - assets/card12.png
+   - assets/card13.png
+   - assets/card14.png
+   - assets/card15.png
+   - assets/card16.png
+   - assets/card17.png
+   - assets/card18.png
+   - assets/card19.png
+   - assets/card20.png
+   - assets/card21.png
+   - assets/card22.png
+   - assets/card23.png
+   - assets/card24.png
+   - assets/card25.png
+   - assets/card26.png
+   - assets/card27.png
+   - assets/card28.png
+   - assets/card29.png
+   - assets/card30.png
+   - assets/card31.png
+   - assets/card32.png
+   - assets/card33.png
+   - assets/card34.png
+   - assets/card35.png
+   - assets/card36.png
+   - assets/card37.png
+   - assets/card38.png
+   - assets/card39.png
+   - assets/card40.png
+   - assets/card41.png
+   - assets/card42.png
+   - assets/card43.png
+   - assets/card44.png
+   - assets/card45.png
+   - assets/card46.png
+   - assets/card47.png
+   - assets/card48.png
+   - assets/card49.png
+   - assets/card50.png
+   - assets/card51.png
+   - assets/card52.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

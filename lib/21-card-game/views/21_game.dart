@@ -11,12 +11,13 @@ class CardGame extends StatefulWidget {
 
 class _CardGameState extends State<CardGame> {
   var player;
-  int _p1c1=1;
+  var _p1c1=1;
   var _p1c2=1;
   var _p1c3=1;
   var _p1c4=1;
   var _p1c5=1;
   var _p1c6=1;
+
   var _p2c1=1;
   var _p2c2=1;
   var _p2c3=1;
@@ -85,25 +86,15 @@ class _CardGameState extends State<CardGame> {
                             padding: EdgeInsets.all(2.0),
                             child: _card2(_p2c1, _p2c2),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
                           _start(),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.7),
                               borderRadius: BorderRadius.circular(20.0)),
                             margin: EdgeInsets.all(4.0),
                             padding: EdgeInsets.all(2.0),
-                            child:_card1(_p1c1, _p2c2),
+                            child:_card1(_p1c1, _p1c2),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          
                           Row(
                             children: <Widget>[
                               _button(Colors.green, 'HIT', true,1),
@@ -149,9 +140,9 @@ Widget _button(Color color, String label, bool state, var player)
       '$label',
     ),
     onPressed: (){
-      state==true
-      ?Hit(player)
-      :Stand();
+      setState((){
+      Hit(player);
+      });
     },
   );
 }
@@ -200,7 +191,7 @@ Hit(var player){
             j=_p2c6;
           }
       });
-      return Image.asset('assets/card$j');
+      return Expanded(child:Image.asset('assets/card$j.png'));
 }
 Stand(){}
 
@@ -213,13 +204,12 @@ Widget _start()
     {
       setState(()
       {
-        if (player == 1) {
-            _p1c1 = Random().nextInt(52) + 1;
             _p1c2 = Random().nextInt(52) + 1;
-          } else if (player==2){
+            _p1c1 = Random().nextInt(52) + 1;
+            
             _p2c1 = Random().nextInt(52) + 1;
             _p2c2 = Random().nextInt(52) + 1;
-          }
+          
       });
     },
     child: Text('START'),
@@ -230,9 +220,9 @@ Widget _card1( var cardnumber1, var cardnumber2)
 {
   return  Row(
       children: <Widget>[
-        Image.asset('assets/card$cardnumber1'),
+        Expanded(child:Image.asset('assets/card$cardnumber1.png')),
         SizedBox( width: 2,),
-        Image.asset('assets/card$cardnumber2',),
+        Expanded(child:Image.asset('assets/card$cardnumber2.png',)),
         SizedBox( width: 2,),
       ],
   );
@@ -242,9 +232,9 @@ Widget _card2( var cardnumber1, var cardnumber2)
 {
   return Row(
       children: <Widget>[
-        Image.asset('assets/card$cardnumber1'),
+        Expanded(child:Image.asset('assets/card$cardnumber1.png')),
         SizedBox( width: 2,),
-        Image.asset('assets/card$cardnumber2',),
+        Expanded(child:Image.asset('assets/card$cardnumber2.png',)),
         SizedBox( width: 2,),
       ],
   );
