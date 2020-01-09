@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'dart:math';
 import 'package:flutter/services.dart';
 
+import 'package:dio/dio.dart';
+
 class UpDownGame extends StatefulWidget {
   @override
   _UpDownGameState createState() => _UpDownGameState();
@@ -15,9 +17,9 @@ class _UpDownGameState extends State<UpDownGame> {
 
   var choice;      //if 1 then win if -1 then loose if 0 then neutral
 
-  var dice1;        //value of dice1
-  var dice2;        //value of dice2
-  
+  var dice1=1;        //value of dice1
+  var dice2=1;        //value of dice2
+
   var total;        //total value of dice1+dice2
   
   var result;        //either "winner" or "loser"
@@ -32,12 +34,36 @@ class _UpDownGameState extends State<UpDownGame> {
   bool twenty=false;
   
   bool picked;  //whether betting coin is selected or not
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    void wish() async {
+  try {
+    Response response = await Dio().post("https://aavishkargames.herokuapp.com/sevenup/toss", 
+    data: {"email": "romitkarmakar@gmail.com"});
+
+    choice=response.data["result"];
+    coins_left=response.data["coins"];
+  } catch (e) {
+    print(e);
+  }
+}
+void wish2() async {
+  try {
+    Response response = await Dio().post("https://aavishkargames.herokuapp.com/sevenup/create", 
+    data: {"email": "romitkarmakar@gmail.com"});
+    coins_left=response.data["coins"];
+  } catch (e) {
+    print(e);
+  }
+}
+  }
 
   @override
   void setState(fn) {
     // TODO: implement setState
-    coins_left=100;
-    choice=0;
+    
     super.setState(fn);
   }
 
@@ -476,5 +502,5 @@ Future<void> _alertChip() async {
 }
 
 
-
 }
+
