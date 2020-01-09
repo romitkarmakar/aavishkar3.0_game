@@ -20,7 +20,7 @@ class _UpDownGameState extends State<UpDownGame> {
   @override
   void setState(fn) {
     // TODO: implement setState
-    coins_left=50;
+    coins_left=100;
     choice=1;
     super.setState(fn);
   }
@@ -57,17 +57,9 @@ class _UpDownGameState extends State<UpDownGame> {
                     child: Column(
                       children: <Widget>[
                         _coinsLeft(coins_left),
-                        SizedBox(height: 10,),
-                      Expanded(child:Container(
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(child: _upButton(),),
-                              SizedBox(width: 70,),
-                              Expanded(child:_downButton(),),
-                            ],
-                          ),
-                        ),),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 20,),
+                        _diceDisplay(),
+                        SizedBox(height: 50,),
                         Container(height:50,
                           width: MediaQuery.of(context).size.width,
                           child:_start()),
@@ -75,15 +67,9 @@ class _UpDownGameState extends State<UpDownGame> {
                         Expanded(child:Container(
                           child: Row(
                             children: <Widget>[
+                              Expanded(child: _upButton(),),
                               SizedBox(width: 10,),
-                              Expanded(
-                                child: Image.asset('assets/$dice1.png'),
-                              ),
-                              SizedBox(width: 10,),
-                              Expanded(
-                                child: Image.asset('assets/$dice2.png'),
-                              ),
-                              SizedBox(width: 10,),
+                              Expanded(child:_downButton(),),
                             ],
                           ),
                         ),),
@@ -111,8 +97,7 @@ class _UpDownGameState extends State<UpDownGame> {
         color: Colors.black12,
         borderRadius: BorderRadius.circular(20.0)
       ),
-      margin: EdgeInsets.only(left: 200),
-      padding: EdgeInsets.all(5),
+      margin: EdgeInsets.only(left: 230),
       child: Row(
         children: <Widget>[
           SizedBox(width: 5.0,),
@@ -304,28 +289,45 @@ Widget _upButton()
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       SizedBox(width: 10,),
-      _chips(5, Colors.yellow,'assets/sky.png'),
+      _chips(5,'assets/sky.png'),
       SizedBox(width: 10,),
-      _chips(10, Colors.greenAccent,'assets/blue.png'),
+      _chips(10,'assets/violet.png'),
       SizedBox(width: 10,),
-      _chips(20, Colors.orange,'assets/violet.png'),
+      _chips(20,'assets/blue.png'),
       SizedBox(width: 10,),
     ],
   )
   );
 }
 
-Widget _chips(var value,Color chip_color, String chip_image)
+Widget _chips( var chip_value,String chip_image)
 {
-  return Expanded(child:CircleAvatar(
-    radius: 60,
-    backgroundImage: AssetImage('$chip_image'),
-        child:InkWell(
-          onTap: (){},
-        
-      ),),);
+  return Expanded(child:Container(
+    child: FlatButton(
+      onPressed: (){},
+      child:Image.asset('$chip_image')
+    ),
+  ));
 }
 
+Widget _diceDisplay()
+{
+  return Expanded(child:Container(
+                          child: Row(
+                            children: <Widget>[
+                              SizedBox(width: 30,),
+                              Expanded(
+                                child: Image.asset('assets/$dice1.png'),
+                              ),
+                              SizedBox(width: 30,),
+                              Expanded(
+                                child: Image.asset('assets/$dice2.png'),
+                              ),
+                              SizedBox(width: 30,),
+                            ],
+                          ),
+                        ),);
+}
 
 
 }
