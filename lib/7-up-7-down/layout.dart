@@ -8,24 +8,31 @@ class UpDownGame extends StatefulWidget {
   _UpDownGameState createState() => _UpDownGameState();
 }
 
+//all the logic codes are written in _start()
 
 class _UpDownGameState extends State<UpDownGame> {
-  var coins_left=50;
-  var choice;
-  var dice1;
-  var dice2;
-  bool up7;
-  bool down7;
-  bool five;
-  bool ten;
-  bool twenty;
+  var coins_left;
+  var choice;      //if 1 then win if -1 then loose if 0 then neutral
+  var dice1;        //value of dice1
+  var dice2;        //value of dice2
+  var total;        //total value of dice1+dice2
+  
+  var result;        //either "winner" or "loser"
+  
+  bool up7=false;
+  bool down7=false;
+  
+  bool five=false;
+  bool ten=false;
+  bool twenty=false;
+  
   bool picked;  //whether betting coin is selected or not
 
   @override
   void setState(fn) {
     // TODO: implement setState
     coins_left=100;
-    choice=1;
+    choice=0;
     super.setState(fn);
   }
 
@@ -129,86 +136,157 @@ class _UpDownGameState extends State<UpDownGame> {
           {
             picked=true;
           }
+
+
           if(up7==false && down7==false)
           {
             _alert7();
           }
+
+
           if(five==false && ten==false && twenty==false)
           {
             _alertChip();
           }
+
+
           if (choice ==0 && up7==true && picked==true) 
           {
             dice1 = Random().nextInt(6) + 1;
             dice2 = Random().nextInt(6) + 1;
+            
+            total=dice1+dice2;
+            
             up7=false;
             down7=false;
+            
             picked=false;
+            
             ten=false;
             five=false;
             twenty=false;
+            
+            if(total>=7)
+            {
+              result="winner";
+            }
+            else
+            {
+              result="loser";
+            }
+            
           } 
+
           else if (choice ==0 && down7==true && picked==true) 
           {
             dice1 = Random().nextInt(6) + 1;
             dice2 = Random().nextInt(6) + 1;
+            
+            total=dice1+dice2;
+            
             up7=false;
             down7=false;
+            
             picked=false;
+            
             ten=false;
             five=false;
             twenty=false;
+            
+            if(total<=7)
+            {
+              result="winner";
+            }
+            else
+            {
+              result="loser";
+            }
           } 
+
           else if(choice==-1 && up7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 1;
             dice2 = Random().nextInt(3) + 1;
+            
+            total=dice1+dice2;
+            
             up7=false;
             down7=false;
+            
             picked=false;
+            
             ten=false;
             five=false;
             twenty=false;
+            
+            result="loser";
           }
+
           else if(choice==-1 && down7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 4;
             dice2 = Random().nextInt(3) + 4;
+            
+            total=dice1+dice2;
+            
             up7=false;
             down7=false;
+            
             picked=false;
+            
             ten=false;
             five=false;
             twenty=false;
+
+            result="loser";
           }
+
           else if(choice==1 && down7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 1;
             dice2 = Random().nextInt(3) + 1;
+
+            total=dice1+dice2;
+            
             up7=false;
             down7=false;
+            
             picked=false;
+            
             ten=false;
             five=false;
             twenty=false;
             
+            result="winner";
           }
+
           else if(choice==1 && up7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 4;
             dice2 = Random().nextInt(3) + 4;
+
+            total=dice1+dice2;
+
             up7=false;
             down7=false;
+
             picked=false;
+
             ten=false;
             five=false;
             twenty=false;
             
+            result="winner";
           }
           
         });
     },
-    child: Text('START'),
+    child: Text('START',
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 30,
+      color: Colors.blueGrey[100]
+    ),),
   );
 }
 
