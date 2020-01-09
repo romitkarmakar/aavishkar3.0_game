@@ -47,15 +47,11 @@ class _UpDownGameState extends State<UpDownGame> {
     data: {"email": "romitkarmakar@gmail.com"});
 
     choice=response.data["result"];
-<<<<<<< HEAD
-=======
-    coins_left=response.data["coins"];
->>>>>>> 18c7676697f760ecca6ca36ccfd7b25bf1a79faa
+
   } catch (e) {
     print(e);
   }
 }
-<<<<<<< HEAD
 void submit() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   try {
@@ -63,13 +59,6 @@ void submit() async {
     data: {"email": "romitkarmakar@gmail.com", "status": result});
     coins_left=response.data["coins"];
     await prefs.setInt('coins', coins_left);
-=======
-void wish2() async {
-  try {
-    Response response = await Dio().post("https://aavishkargames.herokuapp.com/sevenup/create", 
-    data: {"email": "romitkarmakar@gmail.com"});
-    coins_left=response.data["coins"];
->>>>>>> 18c7676697f760ecca6ca36ccfd7b25bf1a79faa
   } catch (e) {
     print(e);
   }
