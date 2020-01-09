@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math';
+import 'package:dio/dio.dart';
 
 class CardGame extends StatefulWidget {
   @override
@@ -11,24 +12,30 @@ class CardGame extends StatefulWidget {
 
 class _CardGameState extends State<CardGame> {
   var player;
-  var _p1c1=1;
-  var _p1c2=1;
-  var _p1c3=1;
-  var _p1c4=1;
-  var _p1c5=1;
-  var _p1c6=1;
-
-  var _p2c1=1;
-  var _p2c2=1;
-  var _p2c3=1;
-  var _p2c4=1;
-  var _p2c5=1;
-  var _p2c6=1;
-  int i=0;
-  var j;
+  var card='C2';
+  var card2='D4';
 
   bool hit1=false;
   bool hit2=false;
+  var api=[];
+  
+
+  @override
+   
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    void getHttp() async {
+  try {
+    Response response = await Dio().post("https://jt7zv80o0l.execute-api.ap-south-1.amazonaws.com/latest/posts");
+    print(response);
+    api=response.data['Items'];
+  } catch (e) {
+    print(e);
+  }
+}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,7 @@ class _CardGameState extends State<CardGame> {
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.7),
+                        color: Colors.black.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20.0)
                         ),
                     margin: EdgeInsets.all(10.0),
@@ -64,22 +71,11 @@ class _CardGameState extends State<CardGame> {
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20.0)),
-                      margin: EdgeInsets.all(5.0),
-                      padding: EdgeInsets.all(5.0),
+                      margin: EdgeInsets.all(10.0),
+                      padding: EdgeInsets.all(10.0),
                       child:Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          _chips(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              _button(Colors.green, 'HIT', true,2),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              _button(Colors.red, 'STAND', false,2)
-                            ],
-                          ),
                           Expanded(child:Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
@@ -87,9 +83,12 @@ class _CardGameState extends State<CardGame> {
                               borderRadius: BorderRadius.circular(20.0)),
                             margin: EdgeInsets.all(4.0),
                             padding: EdgeInsets.all(2.0),
-                            child: _card(_p2c1,_p2c2)
+                            child: Column(
+                              children: <Widget>[
+                              Expanded(child:_card(1,2)),          
+                              ]
+                              )
                           ),),
-                          _start(),
                           Expanded( child:Container(
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
@@ -97,19 +96,24 @@ class _CardGameState extends State<CardGame> {
                               borderRadius: BorderRadius.circular(20.0)),
                             margin: EdgeInsets.all(4.0),
                             padding: EdgeInsets.all(2.0),
-                            child:_card(_p1c1, _p1c2),
+                            child: Column(
+                              children: <Widget>[
+                              Expanded(child:_card(1,2)),
+                              ]
+                              )
+                            
                           ),),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              _button(Colors.green, 'HIT', true,1),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              _button(Colors.red, 'STAND', false,1),
-                            ],
-                          ),
-                          _chips()
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.center,
+                          //   children: <Widget>[
+                          //     _button(Colors.green, 'HIT',1),
+                          //     SizedBox(
+                          //       width: 10,
+                          //     ),
+                          //     _button(Colors.red, 'STAND',1),
+                          //   ],
+                          // ),
+                          _chipsLay()
                         ],
                       ),
                     )
@@ -138,7 +142,7 @@ class _CardGameState extends State<CardGame> {
 
 
 
-Widget _button(Color color, String label, bool state, var player)
+Widget _button(Color color, String label, var player)
 {
   return Expanded(child:RaisedButton(
     color: color,
@@ -147,7 +151,7 @@ Widget _button(Color color, String label, bool state, var player)
     ),
     onPressed: (){
       setState((){
-      Hit(1);
+      
       });
     },
   )
@@ -156,49 +160,7 @@ Widget _button(Color color, String label, bool state, var player)
 Hit(var player){
   setState(()
       {
-        i++;
-        if (player == 1 && i==1) {
-          hit1=true;
-            _p1c3 = Random().nextInt(52) + 1;
-            j=_p1c3;
-          } 
-        else if (player == 1 && i==2) {
-          hit1=true;
-            _p1c4 = Random().nextInt(52) + 1;
-            j=_p1c4;
-          }
-        else if (player == 1 && i==3) {
-          hit1=true;
-            _p1c5 = Random().nextInt(52) + 1;
-            j=_p1c5;
-          }
-        else if (player == 1 && i==4) {
-          hit1=true;
-            _p1c6 = Random().nextInt(52) + 1;
-            j=_p1c6;
-          }
-        else if (player==2 && i==1){
-            hit2=true;
-            _p2c3 = Random().nextInt(52) + 1;
-            j=_p2c3;
-          }
-        else if (player==2 && i==2){
-            hit2=true;
-            _p2c4 = Random().nextInt(52) + 1;
-            j=_p2c4;
-          }
-        else if (player==2 && i==3){
-            hit2=true;
-            _p2c5 = Random().nextInt(52) + 1;
-            j=_p2c5;
-          }
-        else if (player==2 && i==4){
-            hit2=true;
-            _p2c6 = Random().nextInt(52) + 1;
-            j=_p2c6;
-          }
       });
-      return Expanded(child:Image.asset('assets/card$j.png'));
 }
 Stand(){}
 
@@ -211,12 +173,7 @@ Widget _start()
     {
       setState(()
       {
-            _p1c2 = Random().nextInt(52) + 1;
-            _p1c1 = Random().nextInt(52) + 1;
-            
-            _p2c1 = Random().nextInt(52) + 1;
-            _p2c2 = Random().nextInt(52) + 1;
-          
+           
       });
     },
     child: Text('START'),
@@ -233,13 +190,13 @@ Widget _card( var cardnumber1, var cardnumber2)
                   left:0,
                   bottom: 2,
                   top: 2,
-                  child:Image.asset('assets/card$cardnumber1.png'),
+                  child:Image.asset('assets/$card.png'),
                 ),
                 Positioned(
                   left: 50,
                   bottom: 2,
                   top: 2,
-                  child:Image.asset('assets/card$cardnumber2.png'),
+                  child:Image.asset('assets/$card2.png'),
                 ),
               ],
               overflow: Overflow.clip,
@@ -247,43 +204,34 @@ Widget _card( var cardnumber1, var cardnumber2)
          );
 }
 
-Widget _chips()
+  Widget _chipsLay()
 {
   return Container(
-
-                            width: MediaQuery.of(context).size.width,
+  width: MediaQuery.of(context).size.width,
   child:Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
-      Expanded(child:FlatButton(
-        onPressed: (){},
-        color: Colors.orange,
-        child: Text('50'),
-      ),),
       SizedBox(width: 10,),
-      Expanded(child:FlatButton(
-        onPressed: (){},
-        color: Colors.amberAccent,
-        child: Text('100'),
-      ),),
+      _chips(5, Colors.yellow,'assets/sky.png'),
       SizedBox(width: 10,),
-      Expanded(child:FlatButton(
-        onPressed: (){},
-        color: Colors.cyan,
-        child: Text('500'),
-      ),),
+      _chips(10, Colors.greenAccent,'assets/blue.png'),
       SizedBox(width: 10,),
-      Expanded(child:FlatButton(
-        onPressed: (){},
-        color: Colors.pinkAccent,
-        child: Text('1000'),
-      ),),
+      _chips(20, Colors.orange,'assets/violet.png'),
+      SizedBox(width: 10,),
     ],
   )
   );
 }
 
-
-
+Widget _chips(var value,Color chip_color, String chip_image)
+{
+  return Expanded(child:CircleAvatar(
+    radius: 50,
+    backgroundImage: AssetImage('$chip_image'),
+        child:InkWell(
+          onTap: (){},
+        
+      ),),);
+}
 
 }
