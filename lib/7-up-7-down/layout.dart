@@ -16,6 +16,10 @@ class _UpDownGameState extends State<UpDownGame> {
   var dice2;
   bool up7;
   bool down7;
+  bool five;
+  bool ten;
+  bool twenty;
+  bool picked;  //whether betting coin is selected or not
 
   @override
   void setState(fn) {
@@ -121,121 +125,93 @@ class _UpDownGameState extends State<UpDownGame> {
     color: Colors.blueGrey,
     onPressed: (){
       setState(() {
-          if (choice ==0 && up7==true) 
+          if(five==true|| ten==true ||twenty==true)
+          {
+            picked=true;
+          }
+          if(up7==false && down7==false)
+          {
+            _alert7();
+          }
+          if(five==false && ten==false && twenty==false)
+          {
+            _alertChip();
+          }
+          if (choice ==0 && up7==true && picked==true) 
           {
             dice1 = Random().nextInt(6) + 1;
             dice2 = Random().nextInt(6) + 1;
             up7=false;
             down7=false;
+            picked=false;
+            ten=false;
+            five=false;
+            twenty=false;
           } 
-          else if (choice ==0 && down7==true) 
+          else if (choice ==0 && down7==true && picked==true) 
           {
             dice1 = Random().nextInt(6) + 1;
             dice2 = Random().nextInt(6) + 1;
             up7=false;
             down7=false;
+            picked=false;
+            ten=false;
+            five=false;
+            twenty=false;
           } 
-          else if(choice==-1 && up7==true)
+          else if(choice==-1 && up7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 1;
             dice2 = Random().nextInt(3) + 1;
             up7=false;
             down7=false;
+            picked=false;
+            ten=false;
+            five=false;
+            twenty=false;
           }
-          else if(choice==-1 && down7==true)
+          else if(choice==-1 && down7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 4;
             dice2 = Random().nextInt(3) + 4;
             up7=false;
             down7=false;
+            picked=false;
+            ten=false;
+            five=false;
+            twenty=false;
           }
-          else if(choice==1 && down7==true)
+          else if(choice==1 && down7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 1;
             dice2 = Random().nextInt(3) + 1;
             up7=false;
             down7=false;
+            picked=false;
+            ten=false;
+            five=false;
+            twenty=false;
             
           }
-          else if(choice==1 && up7==true)
+          else if(choice==1 && up7==true && picked==true)
           {
             dice1 = Random().nextInt(3) + 4;
             dice2 = Random().nextInt(3) + 4;
             up7=false;
             down7=false;
+            picked=false;
+            ten=false;
+            five=false;
+            twenty=false;
             
           }
+          
         });
     },
     child: Text('START'),
   );
 }
 
- 
-//   Widget _Up(var label,bool state)
-//   {
-//     return CircleAvatar(
-//       radius: 80,
-//       backgroundColor: Colors.lightGreen[300],
-//       child: InkWell(
-//         onTap: (){
-//           setState(()
-//         {
-//           up7=true;
-//           down7=false;
-//         });
-//         },
-//         splashColor: Colors.green,
-//         focusColor: Colors.green[100],
-//         child: Text('$label',
-//           style: TextStyle(
-//             fontWeight: FontWeight.bold,
-//             fontSize: 20
-//       ),),
-//       )
-//     );
-//   }
-
-// Widget _Down(var label,bool state)
-//   {
-//     return CircleAvatar(
-//       radius: 80,
-//       backgroundColor: Colors.lightGreen[300],
-//       child: InkWell(
-//         onTap: (){
-//           setState(()
-//         {
-//           down7=true;
-//           up7=false;
-//         });
-//         },
-//         splashColor: Colors.green,
-//         focusColor: Colors.green[100],
-//         child: Text('$label',
-//           style: TextStyle(
-//             fontWeight: FontWeight.bold,
-//             fontSize: 20
-//       ),),
-//       )
-//     );
-//   }
-
-
-  // Widget _Up(var label,bool state)
-  // {
-  //   return RaisedButton(
-  //     color: Colors.green[100],
-  //     onPressed: ()
-  //     {
-  //       setState(()
-  //       {
-  //         up7=true;
-  //         down7=false;
-  //       });
-  //     },
-  //     child: Text('$label'),
-  //   );
-  // }
 Widget _downButton()
 {
   return
@@ -266,20 +242,6 @@ Widget _upButton()
       child: Image(image: AssetImage('assets/7up.png'),),
     );
 }
-// Widget _Down(var label,bool state)
-//   {
-//     return FlatButton(
-//       onPressed: ()
-//       {
-//         setState(()
-//         {
-//           down7=true;
-//           up7=false;
-//         });
-//       },
-//       child: Text('$label'),
-//     );
-//   }
 
   Widget _chipsLay()
 {
@@ -289,22 +251,60 @@ Widget _upButton()
     mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       SizedBox(width: 10,),
-      _chips(5,'assets/sky.png'),
+      _chips5(5,'assets/sky.png'),
       SizedBox(width: 10,),
-      _chips(10,'assets/violet.png'),
+      _chips10(10,'assets/violet.png'),
       SizedBox(width: 10,),
-      _chips(20,'assets/blue.png'),
+      _chips20(20,'assets/blue.png'),
       SizedBox(width: 10,),
     ],
   )
   );
 }
 
-Widget _chips( var chip_value,String chip_image)
+Widget _chips5( var chip_value,String chip_image)
 {
   return Expanded(child:Container(
     child: FlatButton(
-      onPressed: (){},
+      onPressed: (){
+        setState((){
+          five=true;
+          ten=false;
+          twenty=false;
+        });
+      },
+      child:Image.asset('$chip_image')
+    ),
+  ));
+}
+
+Widget _chips10( var chip_value,String chip_image)
+{
+  return Expanded(child:Container(
+    child: FlatButton(
+      onPressed: (){
+        setState((){
+          five=false;
+          ten=true;;
+          twenty=false;
+        });
+      },
+      child:Image.asset('$chip_image')
+    ),
+  ));
+}
+
+Widget _chips20( var chip_value,String chip_image)
+{
+  return Expanded(child:Container(
+    child: FlatButton(
+      onPressed: (){
+        setState((){
+          five=false;
+          ten=false;
+          twenty=true;
+        });
+      },
       child:Image.asset('$chip_image')
     ),
   ));
@@ -328,6 +328,61 @@ Widget _diceDisplay()
                           ),
                         ),);
 }
+
+Future<void> _alert7() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: true, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Oops!'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Choose between 7 UP and & DOWN!'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Continue'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> _alertChip() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: true, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Oops!'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Choose the value you want to bet on!'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Continue'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 
 
 }
