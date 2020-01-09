@@ -12,13 +12,18 @@ class UpDownGame extends StatefulWidget {
 
 class _UpDownGameState extends State<UpDownGame> {
   var coins_left;
+
   var choice;      //if 1 then win if -1 then loose if 0 then neutral
+
   var dice1;        //value of dice1
   var dice2;        //value of dice2
+  
   var total;        //total value of dice1+dice2
   
   var result;        //either "winner" or "loser"
   
+  var coin_value;     //value of coin, set when the user hit the respective chip_button
+
   bool up7=false;
   bool down7=false;
   
@@ -349,6 +354,9 @@ Widget _chips5( var chip_value,String chip_image)
           five=true;
           ten=false;
           twenty=false;
+
+          coin_value=5;
+
         });
       },
       child:Image.asset('$chip_image')
@@ -365,6 +373,9 @@ Widget _chips10( var chip_value,String chip_image)
           five=false;
           ten=true;;
           twenty=false;
+          
+          coin_value=10;
+
         });
       },
       child:Image.asset('$chip_image')
@@ -381,6 +392,9 @@ Widget _chips20( var chip_value,String chip_image)
           five=false;
           ten=false;
           twenty=true;
+          
+          coin_value=20;
+        
         });
       },
       child:Image.asset('$chip_image')
